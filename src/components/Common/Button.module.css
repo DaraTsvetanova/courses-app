@@ -1,0 +1,11 @@
+.button {
+  background-color: white;
+  margin: 1rem;
+  padding: 0.5rem 2rem;
+  border: 2px solid purple;
+  width: fit-content;
+}
+
+.button:hover {
+  background-color: #ededed;
+}

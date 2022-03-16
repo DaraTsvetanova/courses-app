@@ -1,0 +1,37 @@
+.card {
+  display: flex;
+  justify-content: space-around;
+  padding: 1rem;
+  border: 2px solid green;
+  margin-left: 2rem;
+  margin-right: 2rem;
+  margin-bottom: 2rem;
+  font-size: 21px;
+}
+.title {
+  font-weight: bolder;
+  padding: 1rem 0;
+  font-size: 32px;
+}
+
+.subTitle {
+  margin-right: 0.5rem;
+  padding: 0.5rem 0;
+  font-weight: bolder;
+}
+
+.courseMainInfo {
+  width: 50rem;
+}
+
+.courseInfoContainer {
+  list-style-type: none;
+  display: flex;
+  flex-direction: column;
+}
+
+.courseInfo {
+  display: flex;
+  align-items: center;
+  width: 20rem;
+}
