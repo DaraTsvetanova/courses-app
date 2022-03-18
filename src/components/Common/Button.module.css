@@ -4,6 +4,7 @@
   padding: 0.5rem 2rem;
   border: 2px solid purple;
   width: fit-content;
+  font-size: 16px;
 }
 
 .button:hover {

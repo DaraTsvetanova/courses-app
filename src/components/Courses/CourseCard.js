@@ -11,18 +11,18 @@ export default function CourseCard(props) {
         <p className={styles.courseDescription}>{props.description}</p>
       </div>
       <li className={styles.courseInfoContainer}>
-        <div className={styles.courseInfo}>
-          <h2 className={styles.subTitle}>Author: </h2>
-          <p>{props.authors}</p>
-        </div>
-        <div className={styles.courseInfo}>
-          <h2 className={styles.subTitle}>Duration: </h2>
-          <p>{props.duration}</p>
-        </div>
-        <div className={styles.courseInfo}>
-          <h2 className={styles.subTitle}>Created: </h2>
-          <p>{props.creation}</p>
-        </div>
+        <p className={styles.courseInfo}>
+          <span className={styles.subTitle}>Author:</span>
+          {props.authors}
+        </p>
+        <p className={styles.courseInfo}>
+          <span className={styles.subTitle}>Duration:</span>
+          {props.duration}
+        </p>
+        <p className={styles.courseInfo}>
+          <span className={styles.subTitle}>Created:</span>
+          {props.creation}
+        </p>
         <Button>Show Course</Button>
       </li>
     </div>

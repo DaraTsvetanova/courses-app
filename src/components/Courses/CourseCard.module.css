@@ -31,7 +31,9 @@
 }
 
 .courseInfo {
-  display: flex;
-  align-items: center;
   width: 20rem;
+  padding: 0.5rem;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
 }

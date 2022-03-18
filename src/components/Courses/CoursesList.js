@@ -1,13 +1,13 @@
 import React from "react";
 import CourseCard from "./CourseCard";
-import { mockedCoursesList, mockedAuthorsList } from "../../mocks";
+import { mockedAuthorsList } from "../../mocks";
 
 import styles from "./CoursesList.module.css";
 
-export default function CoursesList() {
+export default function CoursesList(props) {
   return (
     <ul className={styles.coursesList}>
-      {mockedCoursesList.map((course) => {
+      {props.courses.map((course) => {
         const minutes = course.duration % 60;
         const hours = (course.duration - minutes) / 60;
         const output = hours + ":" + minutes + " hours";
