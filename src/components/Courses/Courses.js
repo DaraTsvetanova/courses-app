@@ -40,7 +40,9 @@ export default function Courses() {
             onChange={inputHandler}
             placeholder={placeholder}
           />
-          <Button onClick={searchHandler}>Search</Button>
+          <div className={styles.searchButton}>
+            <Button onClick={searchHandler}>Search</Button>
+          </div>
         </SearchBar>
         <div className={styles.addButton}>
           <Button>Add New Course</Button>

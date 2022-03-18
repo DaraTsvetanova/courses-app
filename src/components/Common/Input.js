@@ -4,14 +4,14 @@ import styles from "./Input.module.css";
 
 export default function Input({ children, placeholder, onChange, type }) {
   return (
-    <div>
+    <div className={styles.container}>
+      <label className={styles.label}>{children}</label>
       <input
         className={styles.input}
         onChange={onChange}
         placeholder={placeholder}
         type={type}
       />
-      <label>{children}</label>
     </div>
   );
 }
