@@ -7,7 +7,7 @@ function App() {
   return (
     <div>
       <Header />
-      <CreateCourses></CreateCourses>
+      {/* <CreateCourses></CreateCourses> */}
       <Courses />
     </div>
   );

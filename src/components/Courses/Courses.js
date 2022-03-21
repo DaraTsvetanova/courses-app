@@ -1,7 +1,6 @@
 import React, { useState } from "react";
 import { mockedCoursesList } from "../../mocks";
 import Button from "../Common/Button";
-import Input from "../Common/Input";
 
 import styles from "./Courses.module.css";
 import CoursesList from "./CoursesList";
@@ -29,20 +28,10 @@ export default function Courses() {
     setInput(inputValue);
   };
 
-  const placeholder = "Enter course name or id...";
-
   return (
     <div className={styles.container}>
       <div className={styles.actions}>
-        <SearchBar>
-          <Input
-            type="text"
-            onChange={inputHandler}
-            placeholder={placeholder}
-          />
-          <div className={styles.searchButton}>
-            <Button onClick={searchHandler}>Search</Button>
-          </div>
+        <SearchBar onInputChange={inputHandler} onSearchClick={searchHandler}>
         </SearchBar>
         <div className={styles.addButton}>
           <Button>Add New Course</Button>
