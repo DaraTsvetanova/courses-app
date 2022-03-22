@@ -8,18 +8,26 @@ import { mockedAuthorsList, mockedCoursesList } from "./mocks";
 function App() {
   const [coursesList, setCoursesList] = useState(mockedCoursesList)
   const [authorsList, setAuthorsList] = useState(mockedAuthorsList)
+  const [isToggled, setIsToggled] = useState(false)
 
-  const createCourseHandler = (title, description, authors, duration) => {
-    setCoursesList((prevCoursesList) => {
-      return [...prevCoursesList, { title, description, creationDate: new Date(), authors, duration, id: Math.random().toString() }]
-    })
+  const createCourseHandler = (course) => {
+    setCoursesList([...coursesList, course])
+
+    setAuthorsList([...authorsList, course.authors])
+
+    setIsToggled(false)
   }
+
+  const toggleHandler = () => {
+    setIsToggled(!isToggled)
+  }
+
 
   return (
     <div>
       <Header />
-      <CreateCourses courses={coursesList} authors={authorsList} onCreateCourse={createCourseHandler}></CreateCourses>
-      <Courses courses={coursesList} />
+      {isToggled && <CreateCourses onToggle={toggleHandler} courses={coursesList} authors={authorsList} onCreateCourse={createCourseHandler} />}
+      {!isToggled && <Courses onToggle={toggleHandler} courses={coursesList} authors={authorsList} />}
     </div>
   );
 }

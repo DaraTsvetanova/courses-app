@@ -10,19 +10,27 @@ export default function CreateCourses({ onCreateCourse, authors }) {
     const [enteredDescription, setEnteredDescription] = useState('');
     const [enteredAuthor, setEnteredAuthor] = useState('');
     const [enteredDuration, setEnteredDuration] = useState('');
-    const [availableAuthors, setAvailableAuthors] = useState([]);
+    const [availableAuthors, setAvailableAuthors] = useState(authors);
     const [addedAuthors, setAddedAuthors] = useState([]);
 
-    useEffect(() => {
-        setAvailableAuthors([...authors]);
-    }, [authors]);
-
     const createCourseHandler = () => {
-        console.log(enteredTitle, enteredDescription, addedAuthors, enteredDuration)
-        if (enteredTitle.trim().length === 0 || enteredDescription.trim().length === 0 || addedAuthors.trim().length === 0 || enteredDuration.trim().length === 0) {
-            return
+        if (!enteredTitle || !enteredDescription || addedAuthors.length === 0 || enteredDuration < 60) {
+            alert('Please fill all of the inputs before submit!');
+            return;
         }
-        // onCreateCourse(enteredTitle, enteredDescription, currentCourseAuthors, enteredDuration);
+        const course = {
+            authors: addedAuthors.map((author) => author.id),
+            creationDate: new Date().toLocaleString().split(',')[0],
+            description: enteredDescription,
+            duration: +enteredDuration,
+            title: enteredTitle,
+            id: enteredTitle + Math.random().toString(),
+
+
+        }
+
+        onCreateCourse(course)
+
         setEnteredTitle('');
         setEnteredDescription('');
         setEnteredAuthor('');
@@ -37,28 +45,28 @@ export default function CreateCourses({ onCreateCourse, authors }) {
             alert('Please fill all of the inputs before submit!');
             return;
         }
+
         const author = {
             name: enteredAuthor,
             id: enteredAuthor + Math.random().toString(),
         };
 
-        setAvailableAuthors((prevAuthorsList) => {
-            return [...prevAuthorsList, author];
-        })
+        setAvailableAuthors([...authors, author])
+
         setEnteredAuthor('');
     }
 
-    const addAuthorHandler = (e) => {
-        const target = e.target;
-        const parent = target.parentElement;
-        const newAuthor = parent.firstChild.innerText;
+    const addAuthorHandler = (currentAuthor) => {
+        setAddedAuthors([...addedAuthors, currentAuthor])
 
-        setAddedAuthors((prevAuthorsList) => {
-            return [...prevAuthorsList, newAuthor]
-        })
+        setAvailableAuthors(availableAuthors.filter(author => author.id !== currentAuthor.id))
     }
 
-    const deleteAuthorHandler = () => { }
+    const deleteAuthorHandler = (currentAuthor) => {
+        setAvailableAuthors([...availableAuthors, currentAuthor])
+
+        setAddedAuthors(addedAuthors.filter(author => author.id !== currentAuthor.id))
+    }
 
     return (
         <div className={styles.container}>
@@ -103,18 +111,18 @@ export default function CreateCourses({ onCreateCourse, authors }) {
                     {availableAuthors.map(author => {
                         return <div key={author.id} className={styles.author}>
                             <p className={styles.authorName}>{author.name}</p>
-                            <Button onClick={addAuthorHandler}>Add Author</Button>
+                            <Button onClick={() => addAuthorHandler(author)}>Add Author</Button>
                         </div>
                     })}
                     <div>
                         <h2 className={styles.title}>Course Authors</h2>
                         {addedAuthors.length === 0 && <p className={styles.authorList}>Author list is empty</p>}
-                        {addedAuthors.map(author => {
-                            return <div key={author.id} className={styles.author}>
-                                <p className={styles.authorName}>{author}</p>
-                                <Button onClick={deleteAuthorHandler}>Delete Author</Button>
+                        {addedAuthors.map(author => (
+                            <div key={author.id} className={styles.author}>
+                                <p className={styles.authorName}>{author.name}</p>
+                                <Button onClick={() => deleteAuthorHandler(author)}>Delete Author</Button>
                             </div>
-                        })}
+                        ))}
                     </div>
                 </div>
             </div>

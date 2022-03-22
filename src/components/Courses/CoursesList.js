@@ -5,10 +5,10 @@ import { mockedAuthorsList } from "../../mocks";
 
 import styles from "./CoursesList.module.css";
 
-export default function CoursesList(props) {
+export default function CoursesList({ courses, authors }) {
   return (
     <ul className={styles.coursesList}>
-      {props.courses.map((course) => {
+      {courses.map((course) => {
         const duration = formatDuration(course.duration)
         return (
           <CourseCard
@@ -17,7 +17,7 @@ export default function CoursesList(props) {
             description={course.description}
             authors={course.authors
               .map((authorId) => {
-                return mockedAuthorsList.find(
+                return authors.find(
                   (mockedAuthor) => mockedAuthor.id === authorId
                 )?.name;
               })

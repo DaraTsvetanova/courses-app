@@ -6,7 +6,7 @@ import styles from "./Courses.module.css";
 import CoursesList from "./CoursesList";
 import SearchBar from "./SearchBar";
 
-export default function Courses({ courses }) {
+export default function Courses({ courses, onToggle, authors }) {
   const [input, setInput] = useState("");
   const [filteredCourses, setFilteredCourses] = useState(courses);
 
@@ -23,10 +23,11 @@ export default function Courses({ courses }) {
   const inputHandler = (e) => {
     const inputValue = e.target.value;
     if (!inputValue) {
-      setFilteredCourses(mockedCoursesList);
+      setFilteredCourses(courses);
     }
     setInput(inputValue);
   };
+
 
   return (
     <div className={styles.container}>
@@ -34,10 +35,10 @@ export default function Courses({ courses }) {
         <SearchBar onInputChange={inputHandler} onSearchClick={searchHandler}>
         </SearchBar>
         <div className={styles.addButton}>
-          <Button>Add New Course</Button>
+          <Button onClick={onToggle}>Add New Course</Button>
         </div>
       </div>
-      <CoursesList courses={filteredCourses} />
+      <CoursesList courses={filteredCourses} authors={authors} />
     </div>
   );
 }
