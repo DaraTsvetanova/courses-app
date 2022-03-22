@@ -59,6 +59,14 @@
   align-items: center;
 }
 
+.authorName {
+  width: 8rem;
+}
+
+.authorList {
+  margin: 2rem;
+}
+
 .label {
   font-size: 18px;
   font-family: Calibri, sans-serif;

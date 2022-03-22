@@ -2,7 +2,7 @@ import React from "react";
 
 import styles from "./Input.module.css";
 
-export default function Input({ children, placeholder, onChange, type }) {
+export default function Input({ children, placeholder, onChange, type, value, pattern }) {
   return (
     <div className={styles.container}>
       <label className={styles.label}>{children}</label>
@@ -11,6 +11,8 @@ export default function Input({ children, placeholder, onChange, type }) {
         onChange={onChange}
         placeholder={placeholder}
         type={type}
+        value={value}
+        pattern={pattern}
       />
     </div>
   );

@@ -6,12 +6,12 @@ import styles from "./Courses.module.css";
 import CoursesList from "./CoursesList";
 import SearchBar from "./SearchBar";
 
-export default function Courses() {
+export default function Courses({ courses }) {
   const [input, setInput] = useState("");
-  const [filteredCourses, setFilteredCourses] = useState(mockedCoursesList);
+  const [filteredCourses, setFilteredCourses] = useState(courses);
 
   const searchHandler = () => {
-    const refinedCourses = mockedCoursesList.filter(
+    const refinedCourses = courses.filter(
       (course) =>
         course.title.toLowerCase().includes(input.toLowerCase()) ||
         course.id === input

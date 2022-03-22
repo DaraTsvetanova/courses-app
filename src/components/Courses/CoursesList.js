@@ -1,5 +1,6 @@
 import React from "react";
 import CourseCard from "./CourseCard";
+import { formatDuration } from "../Helpers/utils";
 import { mockedAuthorsList } from "../../mocks";
 
 import styles from "./CoursesList.module.css";
@@ -8,9 +9,7 @@ export default function CoursesList(props) {
   return (
     <ul className={styles.coursesList}>
       {props.courses.map((course) => {
-        const minutes = course.duration % 60;
-        const hours = (course.duration - minutes) / 60;
-        const output = hours + ":" + minutes + " hours";
+        const duration = formatDuration(course.duration)
         return (
           <CourseCard
             key={course.id}
@@ -23,7 +22,7 @@ export default function CoursesList(props) {
                 )?.name;
               })
               .join(", ")}
-            duration={output}
+            duration={duration}
             creation={course.creationDate}
           />
         );
