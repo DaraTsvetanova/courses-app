@@ -1,7 +1,8 @@
 import React from "react";
+
 import CourseCard from "./CourseCard";
+
 import { formatDuration } from "../Helpers/utils";
-import { mockedAuthorsList } from "../../mocks";
 
 import styles from "./CoursesList.module.css";
 

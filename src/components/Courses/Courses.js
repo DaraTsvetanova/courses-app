@@ -1,5 +1,4 @@
 import React, { useState } from "react";
-import { mockedCoursesList } from "../../mocks";
 import Button from "../Common/Button";
 
 import styles from "./Courses.module.css";

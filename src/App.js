@@ -1,8 +1,10 @@
 import "./App.css";
 import React, { useState } from "react";
+
 import CreateCourses from "./components/CreateCourses/CreateCourses";
 import Courses from "./components/Courses/Courses";
 import Header from "./components/Header/Header";
+
 import { mockedAuthorsList, mockedCoursesList } from "./mocks";
 
 function App() {
@@ -12,6 +14,7 @@ function App() {
 
   const createCourseHandler = (course) => {
     setCoursesList([...coursesList, course])
+    console.log(course.authors)
 
     setAuthorsList([...authorsList, course.authors])
 
@@ -21,7 +24,6 @@ function App() {
   const toggleHandler = () => {
     setIsToggled(!isToggled)
   }
-
 
   return (
     <div>

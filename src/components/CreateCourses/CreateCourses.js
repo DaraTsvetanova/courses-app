@@ -1,6 +1,8 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
+
 import Input from "../Common/Input";
 import Button from "../Common/Button";
+
 import { formatDuration } from "../Helpers/utils";
 
 import styles from "./CreateCourses.module.css";
@@ -15,9 +17,10 @@ export default function CreateCourses({ onCreateCourse, authors }) {
 
     const createCourseHandler = () => {
         if (!enteredTitle || !enteredDescription || addedAuthors.length === 0 || enteredDuration < 60) {
-            alert('Please fill all of the inputs before submit!');
+            alert('Please fill in all fields before submit!');
             return;
         }
+
         const course = {
             authors: addedAuthors.map((author) => author.id),
             creationDate: new Date().toLocaleString().split(',')[0],
@@ -25,8 +28,6 @@ export default function CreateCourses({ onCreateCourse, authors }) {
             duration: +enteredDuration,
             title: enteredTitle,
             id: enteredTitle + Math.random().toString(),
-
-
         }
 
         onCreateCourse(course)
@@ -37,12 +38,9 @@ export default function CreateCourses({ onCreateCourse, authors }) {
         setEnteredDuration('');
     }
 
-    const duration = formatDuration(enteredDuration)
-
-
     const addNewAuthor = () => {
         if (!enteredAuthor) {
-            alert('Please fill all of the inputs before submit!');
+            alert('Please fill in the field to submit an author!');
             return;
         }
 
@@ -51,20 +49,17 @@ export default function CreateCourses({ onCreateCourse, authors }) {
             id: enteredAuthor + Math.random().toString(),
         };
 
-        setAvailableAuthors([...authors, author])
-
+        setAvailableAuthors([...authors, author]);
         setEnteredAuthor('');
     }
 
     const addAuthorHandler = (currentAuthor) => {
         setAddedAuthors([...addedAuthors, currentAuthor])
-
         setAvailableAuthors(availableAuthors.filter(author => author.id !== currentAuthor.id))
     }
 
     const deleteAuthorHandler = (currentAuthor) => {
         setAvailableAuthors([...availableAuthors, currentAuthor])
-
         setAddedAuthors(addedAuthors.filter(author => author.id !== currentAuthor.id))
     }
 
@@ -84,7 +79,6 @@ export default function CreateCourses({ onCreateCourse, authors }) {
                         <textarea value={enteredDescription} placeholder="Enter description" className={styles.textarea} onChange={(e) => setEnteredDescription(e.target.value)}></textarea>
                     </div>
                 </div>
-
             </div>
 
             <div className={styles.innerContainer}>
@@ -97,16 +91,14 @@ export default function CreateCourses({ onCreateCourse, authors }) {
                     </div>
                     <div >
                         <h2 className={styles.title}>Duration</h2>
-                        <Input type="text" pattern="[0-9]*" value={enteredDuration} placeholder="Enter duration in minutes..." onChange={(e) => setEnteredDuration(e.target.value)}>Duration</Input>
+                        <Input type="number" value={enteredDuration} placeholder="Enter duration in minutes..." onChange={(e) => setEnteredDuration(e.target.value)}>Duration</Input>
                         <p className={styles.duration}>
-                            Duration: <span className={styles.span}>{duration}</span>
+                            Duration: <span className={styles.span}>{formatDuration(enteredDuration)}</span>
                         </p>
                     </div>
-
                 </div>
 
                 <div className={styles.rightContainer}>
-
                     <h2 className={styles.title}>Authors</h2>
                     {availableAuthors.map(author => {
                         return <div key={author.id} className={styles.author}>
