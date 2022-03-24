@@ -19,7 +19,7 @@ export default function CoursesList({ courses, authors }) {
             authors={course.authors
               .map((authorId) => {
                 return authors.find(
-                  (mockedAuthor) => mockedAuthor.id === authorId
+                  (a) => a.id === authorId
                 )?.name;
               })
               .join(", ")}

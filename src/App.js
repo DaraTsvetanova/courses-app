@@ -14,8 +14,6 @@ function App() {
 
   const createCourseHandler = (course) => {
     setCoursesList([...coursesList, course])
-    console.log(course.authors)
-
     setAuthorsList([...authorsList, course.authors])
 
     setIsToggled(false)

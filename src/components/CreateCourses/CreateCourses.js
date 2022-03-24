@@ -15,6 +15,8 @@ export default function CreateCourses({ onCreateCourse, authors }) {
     const [availableAuthors, setAvailableAuthors] = useState(authors);
     const [addedAuthors, setAddedAuthors] = useState([]);
 
+    console.log(addedAuthors)
+
     const createCourseHandler = () => {
         if (!enteredTitle || !enteredDescription || addedAuthors.length === 0 || enteredDuration < 60) {
             alert('Please fill in all fields before submit!');
@@ -49,12 +51,14 @@ export default function CreateCourses({ onCreateCourse, authors }) {
             id: enteredAuthor + Math.random().toString(),
         };
 
+
         setAvailableAuthors([...authors, author]);
         setEnteredAuthor('');
     }
 
     const addAuthorHandler = (currentAuthor) => {
         setAddedAuthors([...addedAuthors, currentAuthor])
+        console.log(addedAuthors)
         setAvailableAuthors(availableAuthors.filter(author => author.id !== currentAuthor.id))
     }
 
@@ -68,7 +72,7 @@ export default function CreateCourses({ onCreateCourse, authors }) {
             <div className={styles.mainAction}>
                 <div className={styles.mainInfo}>
                     <div className={styles.wrapper}>
-                        <Input value={enteredTitle} placeholder="Enter title..." onChange={(e) => setEnteredTitle(e.target.value)}>Title</Input>
+                        <Input label="Title" value={enteredTitle} placeholder="Enter title..." onChange={(e) => setEnteredTitle(e.target.value)} />
 
                         <div className={styles.action}>
                             <Button type="submit" onClick={createCourseHandler}>Create course</Button>
@@ -86,12 +90,12 @@ export default function CreateCourses({ onCreateCourse, authors }) {
                 <div className={styles.leftContainer}>
                     <h2 className={styles.title}>Add Author</h2>
                     <div>
-                        <Input value={enteredAuthor} placeholder="Enter author name..." onChange={(e) => setEnteredAuthor(e.target.value)}>Author Name</Input>
+                        <Input value={enteredAuthor} label="Author" placeholder="Enter author name..." onChange={(e) => setEnteredAuthor(e.target.value)} />
                         <Button onClick={addNewAuthor}>Create Author</Button>
                     </div>
                     <div >
                         <h2 className={styles.title}>Duration</h2>
-                        <Input type="number" value={enteredDuration} placeholder="Enter duration in minutes..." onChange={(e) => setEnteredDuration(e.target.value)}>Duration</Input>
+                        <Input label="Duration" type="number" value={enteredDuration} placeholder="Enter duration in minutes..." onChange={(e) => setEnteredDuration(e.target.value)} />
                         <p className={styles.duration}>
                             Duration: <span className={styles.span}>{formatDuration(enteredDuration)}</span>
                         </p>
